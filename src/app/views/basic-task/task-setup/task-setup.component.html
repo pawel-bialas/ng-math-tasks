@@ -1,56 +1,135 @@
-
-
-<mat-grid-list [cols]="cols" [rowHeight]="rowHeight">
-
-  <mat-grid-tile
-  >
-
-    <mat-card class="course-card mat-elevation-z7">
-
-      <mat-card-header>
-
-        <mat-card-title>Select operator</mat-card-title>
-
-      </mat-card-header>
-
+<mat-grid-list [cols]=1 [rowHeight]="rowHeight">
+  <mat-grid-tile>
+    <mat-card class="mat-elevation-z7" >
       <mat-card-content>
-        <div class="options-area">
-
-            <div class="setup-option">
-              <button mat-fab color="accent" (click)="updateOperator(mathOperator.mathOperator_add)">
-                +
-              </button>
-            </div>
-            <div class="setup-option">
-              <button mat-fab color="accent" (click)="updateOperator(mathOperator.mathOperator_subtract)">
-                -
-              </button>
-            </div>
-            <div class="setup-option">
-              <button mat-fab color="accent" (click)="updateOperator(mathOperator.mathOperator_multiply)">
-                *
-              </button>
-            </div>
+        <h2 >Task configuration</h2>
+        <div class="task-config">
+          <span>Operator: {{taskConfig.mathOperator}}</span>
+          <span>Quantity: {{taskConfig.quantity}}</span>
+          <span>Range: {{taskConfig.range}}</span>
+          <span>Variant: {{taskConfig.qMarkPosition.toString()}}</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+<mat-grid-list [cols]="cols" [rowHeight]="rowHeight">
+  <mat-grid-tile>
+    <mat-card class="mat-elevation-z7">
+      <mat-card-content>
+        <h2 >Select operator</h2>
+        <div class="options-area" id="mathOperator">
+          <div class="setup-option">
+            <button mat-fab color="primary" (click)="updateOperator(mathOperator.mathOperator_add)">
+              +
+            </button>
           </div>
           <div class="setup-option">
-            <button mat-fab color="accent" (click)="updateOperator(mathOperator.mathOperator_divide)">
+            <button mat-fab color="primary" (click)="updateOperator(mathOperator.mathOperator_subtract)">
+              -
+            </button>
+          </div>
+          <div class="setup-option">
+            <button mat-fab color="primary" (click)="updateOperator(mathOperator.mathOperator_multiply)">
+              *
+            </button>
+          </div>
+          <div class="setup-option">
+            <button mat-fab color="primary" (click)="updateOperator(mathOperator.mathOperator_divide)">
               /
             </button>
           </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card class="mat-elevation-z7">
+      <mat-card-content>
+        <h2 >Select quantity</h2>
+        <div class="options-area" id="taskQuantity">
+          <div class="setup-option">
+            <button mat-fab color="primary" (click)="updateQuantity(taskQuantity.quantity_4)">
+              4
+            </button>
+          </div>
+          <div class="setup-option">
+            <button mat-fab color="primary" (click)="updateQuantity(taskQuantity.quantity_10)">
+              10
+            </button>
+          </div>
+          <div class="setup-option">
+            <button mat-fab color="primary" (click)="updateQuantity(taskQuantity.quantity_20)">
+              20
+            </button>
+          </div>
+          <div class="setup-option">
+            <button mat-fab color="primary" (click)="updateQuantity(taskQuantity.quantity_40)">
+              40
+            </button>
+          </div>
+
+        </div>
+
       </mat-card-content>
 
-      <mat-card-actions class="course-actions">
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card class="mat-elevation-z7">
+      <mat-card-content>
+        <h2 >Select range</h2>
+        <div class="options-area" id="taskRange">
 
-        <button mat-raised-button color="accent" (click)="editCourse(course)">
-          UPDATE
-        </button>
+          <div class="setup-option">
+            <button mat-fab color="primary" (click)="updateRange(taskRange.range_10)">
+              10
+            </button>
+          </div>
+          <div class="setup-option">
+            <button mat-fab color="primary" (click)="updateRange(taskRange.range_20)">
+              20
+            </button>
+          </div>
+          <div class="setup-option">
+            <button mat-fab color="primary" (click)="updateRange(taskRange.range_50)">
+              50
+            </button>
+          </div>
+          <div class="setup-option">
+            <button mat-fab color="primary" (click)="updateRange(taskRange.range_100)">
+              100
+            </button>
+          </div>
+        </div>
 
-      </mat-card-actions>
-
-
+      </mat-card-content>
 
     </mat-card>
-
+  </mat-grid-tile>
+  <mat-grid-tile>
+    <mat-card class="mat-elevation-z7">
+      <mat-card-content>
+        <h2 >Select question mark position</h2>
+        <div class="options-area" id="qMarkPosition">
+          <div class="setup-option">
+            <button mat-fab color="primary" (click)="updateVariant(qMarkPosition.qMarkPosition_left)">
+              left
+            </button>
+          </div>
+          <div class="setup-option">
+            <button mat-fab color="primary" (click)="updateVariant(qMarkPosition.qMarkPosition_center)">
+              center
+            </button>
+          </div>
+          <div class="setup-option">
+            <button mat-fab color="primary" (click)="updateVariant(qMarkPosition.qMarkPosition_right)">
+              right
+            </button>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
   </mat-grid-tile>
 
 

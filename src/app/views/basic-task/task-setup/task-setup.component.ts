@@ -17,13 +17,14 @@ export class TaskSetupComponent implements OnInit {
 
   //Display properties
   cols = 1;
-  rowHeight = '500px';
+  rowHeight = '300px';
 
   //Object properties
   taskConfig: TaskConfig = new TaskConfig(TaskQuantity.quantity_4, TaskRange.range_10, TaskQMarkPosition.qMarkPosition_right, TaskMathOperator.mathOperator_add, false);
   qMarkPosition = TaskQMarkPosition;
   mathOperator = TaskMathOperator;
-
+  taskQuantity = TaskQuantity;
+  taskRange = TaskRange;
   constructor(
               private responsive: BreakpointObserver, private taskConfigService: TaskConfigService) {
   }
@@ -38,7 +39,7 @@ export class TaskSetupComponent implements OnInit {
                 .subscribe(result => {
 
                     this.cols = 3;
-                    this.rowHeight = "500px";
+                    this.rowHeight = "300px";
 
 
                     const breakpoints = result.breakpoints;
@@ -48,7 +49,7 @@ export class TaskSetupComponent implements OnInit {
                     }
                     else if (breakpoints[Breakpoints.HandsetPortrait]) {
                         this.cols = 1;
-                        this.rowHeight = "430px";
+                        this.rowHeight = "230px";
                     }
                     else if (breakpoints[Breakpoints.HandsetLandscape]) {
                         this.cols = 1;
@@ -79,15 +80,30 @@ export class TaskSetupComponent implements OnInit {
   }
 
   updateOperator(operator: TaskMathOperator): void {
+    let currentSection = document.getElementById('mathOperator');
+    if (currentSection) {
+      let buttons = currentSection.getElementsByTagName('button');
+      console.log(buttons);
+      // @ts-ignore
+      for (let button of buttons) {
+        if (operator === button.innerText) {
+          console.log('asd');
+        }
+      }
+    }
+
     this.taskConfig.mathOperator = operator;
     this.taskConfigService.updateSetup(this.taskConfig);
   }
 
-  updateProperty(propNameToken: string){
-    if (propNameToken in this.taskConfig) {
-
-    }
-  }
+  // updateProperty(propNameToken: string){
+  //   for (let taskConfigKey in this.taskConfig ) {
+  //     if (taskConfigKey === propNameToken) {
+  //       // @ts-ignore
+  //       this.taskConfig[taskConfigKey] = propNameToken;
+  //     }
+  //   }
+  // }
 
   resetSetup(){
     this.taskConfigService.updateSetup(new TaskConfig(TaskQuantity.quantity_4, TaskRange.range_10, TaskQMarkPosition.qMarkPosition_right, TaskMathOperator.mathOperator_add, false));
