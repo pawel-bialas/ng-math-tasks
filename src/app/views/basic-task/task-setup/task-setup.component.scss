@@ -1,4 +1,31 @@
+mat-card-content > h2 {
+  text-align: center;
+}
+
+
+.option-card{
+  width: 32vw;
+}
+
 .options-area {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 3vh;
+}
+
+.setup-option {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.title_center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.task-config {
+  display: flex;
+  flex-direction: column;
 }
