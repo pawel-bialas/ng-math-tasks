@@ -7,27 +7,12 @@
 
       <a mat-list-item routerLink="/">
         <mat-icon>home</mat-icon>
-        <span>Home</span>
+        <span>ng math tasks</span>
       </a>
 
       <a mat-list-item routerLink="about">
         <mat-icon>question_answer</mat-icon>
         <span>About</span>
-      </a>
-
-      <a mat-list-item routerLink="drag-drop-example">
-        <mat-icon>drag_indicator</mat-icon>
-        <span>Drag and Drop</span>
-      </a>
-
-      <a mat-list-item routerLink="tree-demo">
-        <mat-icon>park</mat-icon>
-        <span>Tree Demo</span>
-      </a>
-
-      <a mat-list-item routerLink="virtual-scrolling">
-        <mat-icon>import_export</mat-icon>
-        <span>Virtual Scrolling</span>
       </a>
 
       <a mat-list-item routerLink="register">
@@ -52,25 +37,22 @@
       <mat-icon>menu</mat-icon>
     </button>
 
-    <a mat-button [matMenuTriggerFor]="dropdown">
-      Screens
+    <a mat-button routerLink="/">
+      <mat-icon>home</mat-icon>
+      <span>ng math tasks</span>
     </a>
 
-    <mat-menu #dropdown>
+    <a mat-button routerLink="about">
+      <mat-icon>question_answer</mat-icon>
+      About
+    </a>
 
-      <button mat-menu-item routerLink="/">Courses</button>
-
-      <button mat-menu-item routerLink="/about">About</button>
-
-    </mat-menu>
-
-
-    <a mat-button>
+    <a mat-button routerLink="register">
       <mat-icon>person_add</mat-icon>
       Register
     </a>
 
-    <a mat-button>
+    <a mat-button routerLink="login">
       <mat-icon>account_circle</mat-icon>
       Login
     </a>
