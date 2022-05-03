@@ -16,6 +16,9 @@ import { HomeComponent } from './views/home/home.component';
 import { LoginComponent } from './views/login/login.component';
 import { AboutComponent } from './views/about/about.component';
 import { RegisterComponent } from './views/register/register.component';
+import { BasicTaskComponent } from './views/basic-task/basic-task.component';
+import { TaskWindowComponent } from './views/basic-task/task-window/task-window.component';
+import { TaskSetupComponent } from './views/basic-task/task-setup/task-setup.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +26,10 @@ import { RegisterComponent } from './views/register/register.component';
     HomeComponent,
     LoginComponent,
     AboutComponent,
-    RegisterComponent
+    RegisterComponent,
+    BasicTaskComponent,
+    TaskWindowComponent,
+    TaskSetupComponent
   ],
   imports: [
     BrowserModule,
