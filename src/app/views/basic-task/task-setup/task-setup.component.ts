@@ -6,6 +6,7 @@ import {TaskMathOperator} from "../model/TaskMathOperator";
 import {TaskConfigService} from "../service/task-config.service";
 import {TaskRange} from "../model/TaskRange";
 import {TaskQuantity} from "../model/TaskQuantity";
+import {TaskCreateService} from "../service/task-create.service";
 
 @Component({
   selector: 'app-task-setup',
@@ -26,7 +27,7 @@ export class TaskSetupComponent implements OnInit {
   taskQuantity = TaskQuantity;
   taskRange = TaskRange;
   constructor(
-              private responsive: BreakpointObserver, private taskConfigService: TaskConfigService) {
+              private responsive: BreakpointObserver, private taskConfigService: TaskConfigService, private taskCreateService: TaskCreateService) {
   }
 
   ngOnInit() {
@@ -110,6 +111,6 @@ export class TaskSetupComponent implements OnInit {
   }
 
   createTask(){
-   // this.taskCreateService.createTask(this.taskConfig);
+   this.taskCreateService.createTask(this.taskConfig);
   }
 }

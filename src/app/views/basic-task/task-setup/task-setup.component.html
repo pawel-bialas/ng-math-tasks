@@ -1,5 +1,5 @@
 <div class="taskSetup">
-  <div class="w3-container">
+  <div class="w3-container mainList">
     <div class="w3-container configList">
       <mat-grid-list [cols]=1 [rowHeight]="rowHeight">
         <mat-grid-tile>
@@ -15,12 +15,14 @@
               </div>
             </mat-card-content>
           </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile>
           <mat-card class="mat-elevation-z7" >
             <mat-card-content>
               <h2 >Ready?</h2>
               <div class="actionButtons">
                 <div class="buttonContainer">
-                  <button (click)="updateOperator(mathOperator.mathOperator_add)"
+                  <button (click)="createTask()"
                           mat-fab color="primary"
                           aria-label="Example icon button with a delete icon">
                     <mat-icon> offline pin icon</mat-icon>

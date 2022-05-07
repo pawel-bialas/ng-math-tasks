@@ -3,6 +3,9 @@
   flex-direction: column;
 
 }
+.taskSetup .mainList {
+
+}
 .taskSetup mat-card {
   width: calc(100% - 70px);
   height: calc(100% - 70px);
@@ -58,5 +61,5 @@
 .taskSetup .buttonContainer {
   display: flex;
   justify-content: center;
-  width: 120px;
+
 }
