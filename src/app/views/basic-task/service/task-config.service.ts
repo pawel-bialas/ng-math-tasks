@@ -26,9 +26,4 @@ export class TaskConfigService {
   this.taskOptions = new BehaviorSubject(new TaskConfig(4, 10, TaskQMarkPosition.qMarkPosition_right, TaskMathOperator.mathOperator_add, false));
   }
 
-  createTask(tasksOptions: TaskConfig){
-    tasksOptions.isReady = true;
-    this.taskOptions.next(tasksOptions);
-
-  }
 }

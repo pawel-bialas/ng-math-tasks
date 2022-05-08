@@ -4,9 +4,9 @@
       <mat-grid-list [cols]=1 [rowHeight]="rowHeight">
         <mat-grid-tile>
 
-          <mat-card class="mat-elevation-z7" >
+          <mat-card class="mat-elevation-z7">
             <mat-card-content>
-              <h2 >Set up</h2>
+              <h2>Set up</h2>
               <div class="task-config">
                 <span>Operator: {{taskConfig.mathOperator}}</span>
                 <span>Quantity: {{taskConfig.quantity}}</span>
@@ -17,20 +17,22 @@
           </mat-card>
         </mat-grid-tile>
         <mat-grid-tile>
-          <mat-card class="mat-elevation-z7" >
+          <mat-card class="mat-elevation-z7">
             <mat-card-content>
-              <h2 >Ready?</h2>
+              <h2>Ready?</h2>
               <div class="actionButtons">
                 <div class="buttonContainer">
                   <button (click)="createTask()"
                           mat-fab color="primary"
                           aria-label="Example icon button with a delete icon">
-                    <mat-icon> offline pin icon</mat-icon>
+                    <mat-icon>start</mat-icon>
                   </button>
                 </div>
                 <div class="buttonContainer">
-                  <button mat-fab color="accent" aria-label="Example icon button with a bookmark icon">
-                    <mat-icon>bookmark</mat-icon>
+                  <button (click)="resetSetup()"
+                          mat-fab color="accent"
+                          aria-label="Example icon button with a bookmark icon">
+                    <mat-icon>restart_alt</mat-icon>
                   </button>
                 </div>
               </div>
@@ -44,7 +46,7 @@
         <mat-grid-tile>
           <mat-card class="mat-elevation-z7">
             <mat-card-content>
-              <h2 >What operator?</h2>
+              <h2>What operator?</h2>
               <div class="options-area" id="mathOperator">
                 <div class="setup-option">
                   <button mat-fab color="primary" (click)="updateOperator(mathOperator.mathOperator_add)">
@@ -73,7 +75,7 @@
         <mat-grid-tile>
           <mat-card class="mat-elevation-z7">
             <mat-card-content>
-              <h2 >How many?</h2>
+              <h2>How many?</h2>
               <div class="options-area" id="taskQuantity">
                 <div class="setup-option">
                   <button mat-fab color="primary" (click)="updateQuantity(taskQuantity.quantity_4)">
@@ -105,7 +107,7 @@
         <mat-grid-tile>
           <mat-card class="mat-elevation-z7">
             <mat-card-content>
-              <h2 >What range?</h2>
+              <h2>What range?</h2>
               <div class="options-area" id="taskRange">
 
                 <div class="setup-option">
@@ -137,7 +139,7 @@
         <mat-grid-tile>
           <mat-card class="mat-elevation-z7">
             <mat-card-content>
-              <h2 >What "?" mark position?</h2>
+              <h2>What "?" mark position?</h2>
               <div class="options-area" id="qMarkPosition">
                 <div class="setup-option">
                   <button mat-fab color="primary" (click)="updateVariant(qMarkPosition.qMarkPosition_left)">

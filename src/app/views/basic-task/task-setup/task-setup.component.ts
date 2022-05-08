@@ -61,8 +61,10 @@ export class TaskSetupComponent implements OnInit {
 
                 });
 
+  }
 
-
+  resetButtons(){
+    let buttonsArray = [];
   }
 
   updateQuantity(quantity: number): void {
