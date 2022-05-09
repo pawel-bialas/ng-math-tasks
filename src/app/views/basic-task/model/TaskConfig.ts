@@ -19,23 +19,7 @@ export class TaskConfig {
    this.isReady = isReady;
   }
 
-  getquantity(){
-    return this.quantity;
-  }
-
-  getrange(){
-    return this.range;
-  }
-
-  getqMarkPosition(){
-    return this.qMarkPosition;
-  }
-
-  getmathOperator(){
-    return this.mathOperator;
-  }
-
-  getPropertiesArray(){
+  getListProperties(){
     return ['quantity', 'range','qMarkPosition', 'mathOperator'];
   }
 

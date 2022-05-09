@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {TaskConfig} from "../model/TaskConfig";
 import {TaskQMarkPosition} from "../model/TaskQMarkPosition";
@@ -7,13 +7,14 @@ import {TaskConfigService} from "../service/task-config.service";
 import {TaskRange} from "../model/TaskRange";
 import {TaskQuantity} from "../model/TaskQuantity";
 import {TaskCreateService} from "../service/task-create.service";
+import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-task-setup',
   templateUrl: './task-setup.component.html',
   styleUrls: ['./task-setup.component.scss']
 })
-export class TaskSetupComponent implements OnInit {
+export class TaskSetupComponent implements OnInit, OnDestroy, AfterViewInit {
 
 
   //Display properties
@@ -26,79 +27,74 @@ export class TaskSetupComponent implements OnInit {
   mathOperator = TaskMathOperator;
   taskQuantity = TaskQuantity;
   taskRange = TaskRange;
+
+  //Subscriptions
+  taskConfigSub: Subscription = new Subscription();
+
+  //TemplateRefs
+  @ViewChild('_mathOperator', {read: ElementRef})
+  _mathOperator!: ElementRef;
+  @ViewChild('_quantity', {read: ElementRef})
+  _quantity!: ElementRef;
+  @ViewChild('_range', {read: ElementRef})
+  _range!: ElementRef;
+  @ViewChild('_qMarkPosition', {read: ElementRef})
+  _qMarkPosition!: ElementRef;
+
   constructor(
-              private responsive: BreakpointObserver, private taskConfigService: TaskConfigService, private taskCreateService: TaskCreateService) {
+    private responsive: BreakpointObserver, private taskConfigService: TaskConfigService, private taskCreateService: TaskCreateService) {
   }
 
+  ngAfterViewInit(): void {
+    console.log('Values on ngAfterViewInit():');
+    console.log("sample:", this._mathOperator.nativeElement);
+    console.log("sample:", this._qMarkPosition.nativeElement);
+    console.log("sample:", this._quantity.nativeElement);
+    console.log("sample:", this._range.nativeElement);
+    }
+
+  ngOnDestroy(): void {
+    this.taskConfigSub.unsubscribe();
+    }
+
   ngOnInit() {
-            this.responsive.observe([
-                Breakpoints.TabletPortrait,
-                Breakpoints.TabletLandscape,
-                Breakpoints.HandsetPortrait,
-                Breakpoints.HandsetLandscape
-            ])
-                .subscribe(result => {
+    this.taskConfigSub = this.taskConfigService.data$.subscribe(value => {
+      this.taskConfig = value;
+    });
 
-                    this.cols = 3;
-                    this.rowHeight = "300px";
+    this.responsive.observe([
+      Breakpoints.TabletPortrait,
+      Breakpoints.TabletLandscape,
+      Breakpoints.HandsetPortrait,
+      Breakpoints.HandsetLandscape
+    ])
+      .subscribe(result => {
+
+        this.cols = 3;
+        this.rowHeight = "300px";
 
 
-                    const breakpoints = result.breakpoints;
+        const breakpoints = result.breakpoints;
 
-                    if (breakpoints[Breakpoints.TabletPortrait]) {
-                        this.cols = 1;
-                    }
-                    else if (breakpoints[Breakpoints.HandsetPortrait]) {
-                        this.cols = 1;
-                        this.rowHeight = "230px";
-                    }
-                    else if (breakpoints[Breakpoints.HandsetLandscape]) {
-                        this.cols = 1;
-                    }
-                    else if (breakpoints[Breakpoints.TabletLandscape]) {
-                        this.cols = 2;
-                    }
+        if (breakpoints[Breakpoints.TabletPortrait]) {
+          this.cols = 1;
+        } else if (breakpoints[Breakpoints.HandsetPortrait]) {
+          this.cols = 1;
+          this.rowHeight = "230px";
+        } else if (breakpoints[Breakpoints.HandsetLandscape]) {
+          this.cols = 1;
+        } else if (breakpoints[Breakpoints.TabletLandscape]) {
+          this.cols = 2;
+        }
 
-                });
+      });
 
   }
 
   resetButtons(){
-    let buttonContainers = this.taskConfig.getPropertiesArray();
-      // console.log('===============');
-      // console.log(this.taskConfig);
-      // console.log(this.taskConfig.getquantity());
-      // console.log(this.taskConfig.getqMarkPosition());
-      // console.log(this.taskConfig.getmathOperator());
-      // console.log(this.taskConfig.getrange());
-      // console.log(this.taskConfig.getPropertiesArray());
-      // console.log('===============');
-    for (let i = 0; i < buttonContainers.length; i++) {
-      console.log(buttonContainers[i]);
-      let buttonContainer = document.getElementById(buttonContainers[i]);
-      if (buttonContainer !== null){
-        let buttons = buttonContainer.getElementsByTagName('button');
-        console.log(buttons.length);;
-        console.log(buttons);
-        for (let j = 0; j < buttons.length; j++) {
-          let propStringCall = 'this.taskConfig.' + buttonContainers[i];
-          // console.log('-----------');
-          // console.log(propStringCall);
-          // console.log(eval(propStringCall));
-          // console.log(buttons[j].innerText);
-          // console.log('-----------');
-          if (eval(propStringCall) === buttons[j].innerText) {
-            // console.log('=-=-=-=-=')
-            console.log(buttons[j])
-            // console.log('=-=-=-=-=')
-          } else {
-            console.log('notFound')
-          }
-        }
-      }
-    }
-
+    console.log('asd');
   }
+
 
   updateQuantity(quantity: number): void {
     this.taskConfig.quantity = quantity;
@@ -129,12 +125,12 @@ export class TaskSetupComponent implements OnInit {
   //   }
   // }
 
-  resetSetup(){
+  resetSetup() {
     this.resetButtons();
     this.taskConfigService.updateSetup(new TaskConfig(TaskQuantity.quantity_4, TaskRange.range_10, TaskQMarkPosition.qMarkPosition_right, TaskMathOperator.mathOperator_add, false));
   }
 
-  createTask(){
-   this.taskCreateService.createTask(this.taskConfig);
+  createTask() {
+    this.taskCreateService.createTask(this.taskConfig);
   }
 }
