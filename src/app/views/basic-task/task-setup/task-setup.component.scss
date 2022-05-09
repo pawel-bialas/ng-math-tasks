@@ -3,8 +3,9 @@
   flex-direction: column;
 
 }
-.taskSetup .mainList {
-
+.taskSetup .task-action {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
 .taskSetup mat-card {
   width: calc(100% - 70px);

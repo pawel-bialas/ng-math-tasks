@@ -14,13 +14,8 @@
                 <span>Variant: {{taskConfig.qMarkPosition.toString()}}</span>
               </div>
             </mat-card-content>
-          </mat-card>
-        </mat-grid-tile>
-        <mat-grid-tile>
-          <mat-card class="mat-elevation-z7">
-            <mat-card-content>
-              <h2>Ready?</h2>
-              <div class="actionButtons">
+            <mat-card-actions>
+              <div class="task-action">
                 <div class="buttonContainer">
                   <button (click)="createTask()"
                           mat-fab color="primary"
@@ -36,7 +31,7 @@
                   </button>
                 </div>
               </div>
-            </mat-card-content>
+            </mat-card-actions>
           </mat-card>
         </mat-grid-tile>
       </mat-grid-list>
@@ -49,22 +44,22 @@
               <h2>What operator?</h2>
               <div class="options-area" id="mathOperator">
                 <div class="setup-option">
-                  <button mat-fab color="primary" (click)="updateOperator(mathOperator.mathOperator_add)">
+                  <button mat-mini-fab color="primary" (click)="updateOperator(mathOperator.mathOperator_add)">
                     +
                   </button>
                 </div>
                 <div class="setup-option">
-                  <button mat-fab color="primary" (click)="updateOperator(mathOperator.mathOperator_subtract)">
+                  <button mat-mini-fab color="primary" (click)="updateOperator(mathOperator.mathOperator_subtract)">
                     -
                   </button>
                 </div>
                 <div class="setup-option">
-                  <button mat-fab color="primary" (click)="updateOperator(mathOperator.mathOperator_multiply)">
+                  <button mat-mini-fab color="primary" (click)="updateOperator(mathOperator.mathOperator_multiply)">
                     *
                   </button>
                 </div>
                 <div class="setup-option">
-                  <button mat-fab color="primary" (click)="updateOperator(mathOperator.mathOperator_divide)">
+                  <button mat-mini-fab color="primary" (click)="updateOperator(mathOperator.mathOperator_divide)">
                     /
                   </button>
                 </div>
@@ -76,24 +71,24 @@
           <mat-card class="mat-elevation-z7">
             <mat-card-content>
               <h2>How many?</h2>
-              <div class="options-area" id="taskQuantity">
+              <div class="options-area" id="quantity">
                 <div class="setup-option">
-                  <button mat-fab color="primary" (click)="updateQuantity(taskQuantity.quantity_4)">
+                  <button mat-mini-fab color="primary" (click)="updateQuantity(taskQuantity.quantity_4)">
                     4
                   </button>
                 </div>
                 <div class="setup-option">
-                  <button mat-fab color="primary" (click)="updateQuantity(taskQuantity.quantity_10)">
+                  <button mat-mini-fab color="primary" (click)="updateQuantity(taskQuantity.quantity_10)">
                     10
                   </button>
                 </div>
                 <div class="setup-option">
-                  <button mat-fab color="primary" (click)="updateQuantity(taskQuantity.quantity_20)">
+                  <button mat-mini-fab color="primary" (click)="updateQuantity(taskQuantity.quantity_20)">
                     20
                   </button>
                 </div>
                 <div class="setup-option">
-                  <button mat-fab color="primary" (click)="updateQuantity(taskQuantity.quantity_40)">
+                  <button mat-mini-fab color="primary" (click)="updateQuantity(taskQuantity.quantity_40)">
                     40
                   </button>
                 </div>
@@ -108,25 +103,25 @@
           <mat-card class="mat-elevation-z7">
             <mat-card-content>
               <h2>What range?</h2>
-              <div class="options-area" id="taskRange">
+              <div class="options-area" id="range">
 
                 <div class="setup-option">
-                  <button mat-fab color="primary" (click)="updateRange(taskRange.range_10)">
+                  <button mat-mini-fab color="primary" (click)="updateRange(taskRange.range_10)">
                     10
                   </button>
                 </div>
                 <div class="setup-option">
-                  <button mat-fab color="primary" (click)="updateRange(taskRange.range_20)">
+                  <button mat-mini-fab color="primary" (click)="updateRange(taskRange.range_20)">
                     20
                   </button>
                 </div>
                 <div class="setup-option">
-                  <button mat-fab color="primary" (click)="updateRange(taskRange.range_50)">
+                  <button mat-mini-fab color="primary" (click)="updateRange(taskRange.range_50)">
                     50
                   </button>
                 </div>
                 <div class="setup-option">
-                  <button mat-fab color="primary" (click)="updateRange(taskRange.range_100)">
+                  <button mat-mini-fab color="primary" (click)="updateRange(taskRange.range_100)">
                     100
                   </button>
                 </div>
@@ -142,17 +137,17 @@
               <h2>What "?" mark position?</h2>
               <div class="options-area" id="qMarkPosition">
                 <div class="setup-option">
-                  <button mat-fab color="primary" (click)="updateVariant(qMarkPosition.qMarkPosition_left)">
+                  <button mat-mini-fab color="primary" (click)="updateVariant(qMarkPosition.qMarkPosition_left)">
                     left
                   </button>
                 </div>
                 <div class="setup-option">
-                  <button mat-fab color="primary" (click)="updateVariant(qMarkPosition.qMarkPosition_center)">
+                  <button mat-mini-fab color="primary" (click)="updateVariant(qMarkPosition.qMarkPosition_center)">
                     center
                   </button>
                 </div>
                 <div class="setup-option">
-                  <button mat-fab color="primary" (click)="updateVariant(qMarkPosition.qMarkPosition_right)">
+                  <button mat-mini-fab color="primary" (click)="updateVariant(qMarkPosition.qMarkPosition_right)">
                     right
                   </button>
                 </div>

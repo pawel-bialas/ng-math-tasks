@@ -5,11 +5,11 @@ import {TaskQuantity} from "./TaskQuantity";
 
 export class TaskConfig {
 
-  quantity: string | TaskQuantity ;
-  range: string | TaskRange;
-  qMarkPosition: string | TaskQMarkPosition;
-  mathOperator: string | TaskMathOperator;
-  isReady: boolean;
+  public quantity: string | TaskQuantity ;
+  public range: string | TaskRange;
+  public qMarkPosition: string | TaskQMarkPosition;
+  public mathOperator: string | TaskMathOperator;
+  public isReady: boolean;
 
   public constructor(quantity: TaskQuantity, range: TaskRange, qMarkPosition: TaskQMarkPosition, mathOperator: TaskMathOperator, isReady: boolean) {
    this.quantity = quantity;
@@ -17,6 +17,26 @@ export class TaskConfig {
    this.qMarkPosition = qMarkPosition;
    this.mathOperator = mathOperator;
    this.isReady = isReady;
+  }
+
+  getquantity(){
+    return this.quantity;
+  }
+
+  getrange(){
+    return this.range;
+  }
+
+  getqMarkPosition(){
+    return this.qMarkPosition;
+  }
+
+  getmathOperator(){
+    return this.mathOperator;
+  }
+
+  getPropertiesArray(){
+    return ['quantity', 'range','qMarkPosition', 'mathOperator'];
   }
 
 }

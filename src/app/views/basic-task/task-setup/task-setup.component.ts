@@ -64,7 +64,40 @@ export class TaskSetupComponent implements OnInit {
   }
 
   resetButtons(){
-    let buttonsArray = [];
+    let buttonContainers = this.taskConfig.getPropertiesArray();
+      // console.log('===============');
+      // console.log(this.taskConfig);
+      // console.log(this.taskConfig.getquantity());
+      // console.log(this.taskConfig.getqMarkPosition());
+      // console.log(this.taskConfig.getmathOperator());
+      // console.log(this.taskConfig.getrange());
+      // console.log(this.taskConfig.getPropertiesArray());
+      // console.log('===============');
+    for (let i = 0; i < buttonContainers.length; i++) {
+      console.log(buttonContainers[i]);
+      let buttonContainer = document.getElementById(buttonContainers[i]);
+      if (buttonContainer !== null){
+        let buttons = buttonContainer.getElementsByTagName('button');
+        console.log(buttons.length);;
+        console.log(buttons);
+        for (let j = 0; j < buttons.length; j++) {
+          let propStringCall = 'this.taskConfig.' + buttonContainers[i];
+          // console.log('-----------');
+          // console.log(propStringCall);
+          // console.log(eval(propStringCall));
+          // console.log(buttons[j].innerText);
+          // console.log('-----------');
+          if (eval(propStringCall) === buttons[j].innerText) {
+            // console.log('=-=-=-=-=')
+            console.log(buttons[j])
+            // console.log('=-=-=-=-=')
+          } else {
+            console.log('notFound')
+          }
+        }
+      }
+    }
+
   }
 
   updateQuantity(quantity: number): void {
@@ -83,18 +116,6 @@ export class TaskSetupComponent implements OnInit {
   }
 
   updateOperator(operator: TaskMathOperator): void {
-    let currentSection = document.getElementById('mathOperator');
-    if (currentSection) {
-      let buttons = currentSection.getElementsByTagName('button');
-      console.log(buttons);
-      // @ts-ignore
-      for (let button of buttons) {
-        if (operator === button.innerText) {
-          console.log('asd');
-        }
-      }
-    }
-
     this.taskConfig.mathOperator = operator;
     this.taskConfigService.updateSetup(this.taskConfig);
   }
@@ -109,6 +130,7 @@ export class TaskSetupComponent implements OnInit {
   // }
 
   resetSetup(){
+    this.resetButtons();
     this.taskConfigService.updateSetup(new TaskConfig(TaskQuantity.quantity_4, TaskRange.range_10, TaskQMarkPosition.qMarkPosition_right, TaskMathOperator.mathOperator_add, false));
   }
 
