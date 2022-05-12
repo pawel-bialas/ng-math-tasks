@@ -104,7 +104,7 @@ export class TaskSetupComponent implements OnInit, OnDestroy, AfterViewInit {
 
     let rangeSection = this._range.nativeElement;
     let buttonsRange = rangeSection.getElementsByTagName('button');
-    this.setButtonsSection(buttonsRange, this.taskConfig.range);
+    this.setButtonsSection(buttonsRange, this.taskConfig.range.value);
 
     let quantitySection = this._quantity.nativeElement;
     let buttonsQuantity = quantitySection.getElementsByTagName('button');
@@ -160,18 +160,19 @@ export class TaskSetupComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private setButtonsSection(buttons: HTMLCollection, value: any) {
-    // for (let i = 0; i < buttons.length; i++) {
-    //   let span = buttons[i].getElementsByClassName('mat-button-wrapper');
-    //
-    //   if (span[0].textContent) {
-    //     console.log(span);
-    //     if (span[0].textContent.trim() == value) {
-    //       buttons[i].classList.add('selectedButton');
-    //     } else {
-    //       buttons[i].classList.remove('selectedButton');
-    //     }
-    //   }
-    // }
+    for (let i = 0; i < buttons.length; i++) {
+      let span = buttons[i].getElementsByClassName('mat-button-wrapper');
+
+      if (span[0].textContent) {
+        console.log(span);
+        if (span[0].textContent.trim() == value) {
+          buttons[i].classList.add('selectedButton');
+        } else {
+          buttons[i].classList.remove('selectedButton');
+          console.log(buttons[i]);
+        }
+      }
+    }
 
 
   }
