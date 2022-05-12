@@ -8,10 +8,10 @@
             <mat-card-content>
               <h2>Set up</h2>
               <div class="task-config">
-                <span>Operator: {{taskConfig.mathOperator}}</span>
-                <span>Quantity: {{taskConfig.quantity}}</span>
+                <span>Operator: {{taskConfig.mathOperator.value.toString()}}</span>
+                <span>Quantity: {{taskConfig.quantity.value}}</span>
                 <span>Range: {{taskConfig.range.value}}</span>
-                <span>Variant: {{taskConfig.qMarkPosition.toString()}}</span>
+                <span>Variant: {{taskConfig.qMarkPosition.value.toString()}}</span>
               </div>
             </mat-card-content>
             <mat-card-actions>
@@ -51,22 +51,22 @@
               <div class="options-area" id="mathOperator" #_mathOperator>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateOperator(mathOperator.mathOperator_add)">
-                    +
+                    {{mathOperator.mathOperator_add.value}}
                   </button>
                 </div>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateOperator(mathOperator.mathOperator_subtract)">
-                    -
+                    {{mathOperator.mathOperator_subtract.value}}
                   </button>
                 </div>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateOperator(mathOperator.mathOperator_multiply)">
-                    *
+                    {{mathOperator.mathOperator_multiply.value}}
                   </button>
                 </div>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateOperator(mathOperator.mathOperator_divide)">
-                    /
+                    {{mathOperator.mathOperator_divide.value}}
                   </button>
                 </div>
               </div>
@@ -80,22 +80,22 @@
               <div class="options-area" id="quantity" #_quantity>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateQuantity(taskQuantity.quantity_4)">
-                    4
+                    {{taskQuantity.quantity_4.value}}
                   </button>
                 </div>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateQuantity(taskQuantity.quantity_10)">
-                    10
+                    {{taskQuantity.quantity_10.value}}
                   </button>
                 </div>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateQuantity(taskQuantity.quantity_20)">
-                    20
+                    {{taskQuantity.quantity_20.value}}
                   </button>
                 </div>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateQuantity(taskQuantity.quantity_40)">
-                    40
+                    {{taskQuantity.quantity_40.value}}
                   </button>
                 </div>
 
@@ -144,17 +144,17 @@
               <div class="options-area" id="qMarkPosition" #_qMarkPosition>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateVariant(qMarkPosition.qMarkPosition_left)">
-                    left
+                    {{qMarkPosition.qMarkPosition_left.value}}
                   </button>
                 </div>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateVariant(qMarkPosition.qMarkPosition_center)">
-                    center
+                    {{qMarkPosition.qMarkPosition_center.value}}
                   </button>
                 </div>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateVariant(qMarkPosition.qMarkPosition_right)">
-                    right
+                    {{qMarkPosition.qMarkPosition_right.value}}
                   </button>
                 </div>
               </div>

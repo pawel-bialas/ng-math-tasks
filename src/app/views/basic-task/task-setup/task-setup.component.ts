@@ -93,14 +93,10 @@ export class TaskSetupComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   setButtons(){
-    // console.log(this._mathOperator.nativeElement);
-    // console.log(this._quantity.nativeElement);
-    // console.log(this._qMarkPosition.nativeElement);
-    // console.log(this._range.nativeElement);
 
     let mathOperatorSection = this._mathOperator.nativeElement;
     let buttonsMathOperator = mathOperatorSection.getElementsByTagName('button');
-    this.setButtonsSection(buttonsMathOperator, this.taskConfig.mathOperator);
+    this.setButtonsSection(buttonsMathOperator, this.taskConfig.mathOperator.value);
 
     let rangeSection = this._range.nativeElement;
     let buttonsRange = rangeSection.getElementsByTagName('button');
@@ -108,15 +104,15 @@ export class TaskSetupComponent implements OnInit, OnDestroy, AfterViewInit {
 
     let quantitySection = this._quantity.nativeElement;
     let buttonsQuantity = quantitySection.getElementsByTagName('button');
-    this.setButtonsSection(buttonsQuantity, this.taskConfig.quantity);
+    this.setButtonsSection(buttonsQuantity, this.taskConfig.quantity.value);
 
     let qMarkPositionSection = this._qMarkPosition.nativeElement;
     let qMarkPositionQuantity = qMarkPositionSection.getElementsByTagName('button');
-    this.setButtonsSection(qMarkPositionQuantity, this.taskConfig.qMarkPosition);
+    this.setButtonsSection(qMarkPositionQuantity, this.taskConfig.qMarkPosition.value);
   }
 
 
-  updateQuantity(quantity: number): void {
+  updateQuantity(quantity: TaskQuantity): void {
     this.taskConfig.quantity = quantity;
     this.taskConfigService.updateSetup(this.taskConfig);
     this.setButtons();

@@ -17,13 +17,12 @@ export class TaskConfigService {
   constructor() { }
 
   updateSetup(tasksOptions: TaskConfig): void{
-    console.log(tasksOptions);
     this.taskOptions.next(tasksOptions);
 
   }
 
   resetSetup(): void {
-    let taskOptions = new TaskConfig(4, TaskRange.range_10, TaskQMarkPosition.qMarkPosition_right, TaskMathOperator.mathOperator_add, false);
+    let taskOptions = new TaskConfig(TaskQuantity.quantity_4, TaskRange.range_10, TaskQMarkPosition.qMarkPosition_right, TaskMathOperator.mathOperator_add, false);
     this.taskOptions.next(taskOptions)  }
 
 
