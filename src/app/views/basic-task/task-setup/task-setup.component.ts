@@ -51,6 +51,7 @@ export class TaskSetupComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log("sample:", this._qMarkPosition.nativeElement);
     console.log("sample:", this._quantity.nativeElement);
     console.log("sample:", this._range.nativeElement);
+    this.setButtons();
     }
 
   ngOnDestroy(): void {
@@ -91,29 +92,53 @@ export class TaskSetupComponent implements OnInit, OnDestroy, AfterViewInit {
 
   }
 
-  resetButtons(){
-    console.log('asd');
+  setButtons(){
+    // console.log(this._mathOperator.nativeElement);
+    // console.log(this._quantity.nativeElement);
+    // console.log(this._qMarkPosition.nativeElement);
+    // console.log(this._range.nativeElement);
+
+    let mathOperatorSection = this._mathOperator.nativeElement;
+    let buttonsMathOperator = mathOperatorSection.getElementsByTagName('button');
+    this.setButtonsSection(buttonsMathOperator, this.taskConfig.mathOperator);
+
+    let rangeSection = this._range.nativeElement;
+    let buttonsRange = rangeSection.getElementsByTagName('button');
+    this.setButtonsSection(buttonsRange, this.taskConfig.range);
+
+    let quantitySection = this._quantity.nativeElement;
+    let buttonsQuantity = quantitySection.getElementsByTagName('button');
+    this.setButtonsSection(buttonsQuantity, this.taskConfig.quantity);
+
+    let qMarkPositionSection = this._qMarkPosition.nativeElement;
+    let qMarkPositionQuantity = qMarkPositionSection.getElementsByTagName('button');
+    this.setButtonsSection(qMarkPositionQuantity, this.taskConfig.qMarkPosition);
   }
 
 
   updateQuantity(quantity: number): void {
     this.taskConfig.quantity = quantity;
     this.taskConfigService.updateSetup(this.taskConfig);
+    this.setButtons();
   }
 
   updateRange(range: TaskRange): void {
     this.taskConfig.range = range;
     this.taskConfigService.updateSetup(this.taskConfig);
+    this.setButtons();
+
   }
 
   updateVariant(variant: TaskQMarkPosition): void {
     this.taskConfig.qMarkPosition = variant;
     this.taskConfigService.updateSetup(this.taskConfig);
+    this.setButtons();
   }
 
   updateOperator(operator: TaskMathOperator): void {
     this.taskConfig.mathOperator = operator;
     this.taskConfigService.updateSetup(this.taskConfig);
+    this.setButtons();
   }
 
   // updateProperty(propNameToken: string){
@@ -126,11 +151,28 @@ export class TaskSetupComponent implements OnInit, OnDestroy, AfterViewInit {
   // }
 
   resetSetup() {
-    this.resetButtons();
-    this.taskConfigService.updateSetup(new TaskConfig(TaskQuantity.quantity_4, TaskRange.range_10, TaskQMarkPosition.qMarkPosition_right, TaskMathOperator.mathOperator_add, false));
+    this.taskConfigService.resetSetup();
+    this.setButtons();
   }
 
   createTask() {
-    this.taskCreateService.createTask(this.taskConfig);
+    this.taskCreateService.createTaskSet();
+  }
+
+  private setButtonsSection(buttons: HTMLCollection, value: any) {
+    // for (let i = 0; i < buttons.length; i++) {
+    //   let span = buttons[i].getElementsByClassName('mat-button-wrapper');
+    //
+    //   if (span[0].textContent) {
+    //     console.log(span);
+    //     if (span[0].textContent.trim() == value) {
+    //       buttons[i].classList.add('selectedButton');
+    //     } else {
+    //       buttons[i].classList.remove('selectedButton');
+    //     }
+    //   }
+    // }
+
+
   }
 }

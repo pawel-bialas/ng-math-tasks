@@ -10,7 +10,7 @@
               <div class="task-config">
                 <span>Operator: {{taskConfig.mathOperator}}</span>
                 <span>Quantity: {{taskConfig.quantity}}</span>
-                <span>Range: {{taskConfig.range}}</span>
+                <span>Range: {{taskConfig.range.value}}</span>
                 <span>Variant: {{taskConfig.qMarkPosition.toString()}}</span>
               </div>
             </mat-card-content>
@@ -113,22 +113,22 @@
 
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateRange(taskRange.range_10)">
-                    10
+                    {{taskRange.range_10.value}}
                   </button>
                 </div>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateRange(taskRange.range_20)">
-                    20
+                    {{taskRange.range_20.value}}
                   </button>
                 </div>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateRange(taskRange.range_50)">
-                    50
+                    {{taskRange.range_50.value}}
                   </button>
                 </div>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateRange(taskRange.range_100)">
-                    100
+                    {{taskRange.range_100.value}}
                   </button>
                 </div>
               </div>

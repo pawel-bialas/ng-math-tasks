@@ -23,7 +23,9 @@ export class TaskConfigService {
   }
 
   resetSetup(): void {
-  this.taskOptions = new BehaviorSubject(new TaskConfig(4, 10, TaskQMarkPosition.qMarkPosition_right, TaskMathOperator.mathOperator_add, false));
-  }
+    let taskOptions = new TaskConfig(4, TaskRange.range_10, TaskQMarkPosition.qMarkPosition_right, TaskMathOperator.mathOperator_add, false);
+    this.taskOptions.next(taskOptions)  }
+
+
 
 }
