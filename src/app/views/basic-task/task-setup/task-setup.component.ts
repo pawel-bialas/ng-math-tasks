@@ -1,11 +1,11 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
 import {TaskConfig} from "../model/TaskConfig";
-import {TaskQMarkPosition} from "../model/TaskQMarkPosition";
-import {TaskMathOperator} from "../model/TaskMathOperator";
+import {TaskQMarkPosition} from "../params/TaskQMarkPosition";
+import {TaskMathOperator} from "../params/TaskMathOperator";
 import {TaskConfigService} from "../service/task-config.service";
-import {TaskRange} from "../model/TaskRange";
-import {TaskQuantity} from "../model/TaskQuantity";
+import {TaskRange} from "../params/TaskRange";
+import {TaskQuantity} from "../params/TaskQuantity";
 import {TaskCreateService} from "../service/task-create.service";
 import {Subscription} from "rxjs";
 
@@ -46,11 +46,6 @@ export class TaskSetupComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    console.log('Values on ngAfterViewInit():');
-    console.log("sample:", this._mathOperator.nativeElement);
-    console.log("sample:", this._qMarkPosition.nativeElement);
-    console.log("sample:", this._quantity.nativeElement);
-    console.log("sample:", this._range.nativeElement);
     this.setButtons();
     }
 
@@ -158,14 +153,11 @@ export class TaskSetupComponent implements OnInit, OnDestroy, AfterViewInit {
   private setButtonsSection(buttons: HTMLCollection, value: any) {
     for (let i = 0; i < buttons.length; i++) {
       let span = buttons[i].getElementsByClassName('mat-button-wrapper');
-
       if (span[0].textContent) {
-        console.log(span);
         if (span[0].textContent.trim() == value) {
           buttons[i].classList.add('selectedButton');
         } else {
           buttons[i].classList.remove('selectedButton');
-          console.log(buttons[i]);
         }
       }
     }

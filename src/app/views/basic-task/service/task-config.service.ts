@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {TaskConfig} from '../model/TaskConfig';
-import {TaskQMarkPosition} from '../model/TaskQMarkPosition';
-import {TaskMathOperator} from '../model/TaskMathOperator';
-import {TaskRange} from "../model/TaskRange";
-import {TaskQuantity} from "../model/TaskQuantity";
+import {TaskQMarkPosition} from '../params/TaskQMarkPosition';
+import {TaskMathOperator} from '../params/TaskMathOperator';
+import {TaskRange} from "../params/TaskRange";
+import {TaskQuantity} from "../params/TaskQuantity";
 
 @Injectable({
   providedIn: 'root'

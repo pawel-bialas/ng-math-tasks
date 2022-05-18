@@ -1,7 +1,7 @@
-import {TaskQMarkPosition} from './TaskQMarkPosition';
-import {TaskMathOperator} from './TaskMathOperator';
-import {TaskRange} from "./TaskRange";
-import {TaskQuantity} from "./TaskQuantity";
+import {TaskQMarkPosition} from '../params/TaskQMarkPosition';
+import {TaskMathOperator} from '../params/TaskMathOperator';
+import {TaskRange} from "../params/TaskRange";
+import {TaskQuantity} from "../params/TaskQuantity";
 
 export class TaskConfig {
 
