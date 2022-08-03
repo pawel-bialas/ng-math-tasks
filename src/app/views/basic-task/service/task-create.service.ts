@@ -6,7 +6,8 @@ import {TaskConfigService} from "./task-config.service";
 import {TaskQuantity} from "../params/TaskQuantity";
 import {TaskRange} from "../params/TaskRange";
 import {TaskQMarkPosition} from "../params/TaskQMarkPosition";
-import {isNull} from "@angular/compiler/src/output/output_ast";
+import {UUID} from "angular2-uuid";
+import {Task} from "../model/Task";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ import {isNull} from "@angular/compiler/src/output/output_ast";
 export class TaskCreateService implements OnInit, OnDestroy {
 
   //Object & properties
-  taskConfig: TaskConfig = new TaskConfig(TaskQuantity.quantity_4, TaskRange.range_10, TaskQMarkPosition.qMarkPosition_right, TaskMathOperator.mathOperator_add, false)
+  taskConfig: TaskConfig = new TaskConfig(TaskQuantity.quantity_4, TaskRange.range_10, TaskQMarkPosition.qMarkPosition_right, TaskMathOperator.mathOperator_add, false, UUID.UUID())
 
   //Subscriptions
   taskConfigSub: Subscription = new Subscription();
@@ -37,53 +38,104 @@ export class TaskCreateService implements OnInit, OnDestroy {
     this.taskConfigSub = this.taskConfigService.data$.subscribe(value => {
       this.taskConfig = value;
     });
-    console.log(this.provideAddTask(this.taskConfig.mathOperator))
+
+    console.log(this.taskConfig);
+
+    if (this.taskConfig.mathOperator.value === TaskMathOperator.mathOperator_add.value) {
+      this.provideAddTaskSet(this.taskConfig.mathOperator, this.taskConfig.quantity, this.taskConfig.range, this.taskConfig.qMarkPosition);
+    }
+    if (this.taskConfig.mathOperator.value === TaskMathOperator.mathOperator_subtract.value) {
+
+    }
+    if (this.taskConfig.mathOperator.value === TaskMathOperator.mathOperator_divide.value) {
+
+    }
+    if (this.taskConfig.mathOperator.value === TaskMathOperator.mathOperator_multiply.value) {
+
+    }
+
+
   }
 
-  private provideAddTask(mathOperator: TaskMathOperator): any[] {
-    let numbers: number[] = [];
-    if (this.taskConfig){
-      if (mathOperator.value === TaskMathOperator.mathOperator_add.value) {
-          let range: number = Number(this.taskConfig.range.value);
-          let tempNumber = 0;
-          while (numbers.length < 2) {
+  private provideAddTaskSet(mathOperator: TaskMathOperator, quantity: TaskQuantity, range: TaskRange, qMarkPosition: TaskQMarkPosition) {
+    let tasks: Task[] = [];
+    if (mathOperator === TaskMathOperator.mathOperator_add) {
+      let userInputValueIndex: number = 3;
 
-            tempNumber = Math.floor((Math.random() * range));
-            if (tempNumber >= this.taskConfig.range.value / 5){
-              numbers.push(tempNumber);
-            }
-          }
-          numbers.push(numbers[0] + numbers[1]);
+      while (tasks.length < quantity.value) {
 
 
-      }
-      if (mathOperator === TaskMathOperator.mathOperator_subtract) {
+        let numbers = new Map();
+        numbers.set('number1', this.generateNumber());
+        numbers.set('number2', this.generateNumber());
+        numbers.set('result', (numbers.get('number1') + (numbers.get('number2'))));
 
-      }
-      if (mathOperator === TaskMathOperator.mathOperator_divide) {
-
-      }
-      if (mathOperator === TaskMathOperator.mathOperator_multiply) {
-
+        if (qMarkPosition.value === TaskQMarkPosition.qMarkPosition_right.value) {
+          userInputValueIndex = 2;
+        }
+        if (qMarkPosition.value === TaskQMarkPosition.qMarkPosition_center.value) {
+          userInputValueIndex = 1;
+        }
+        if (qMarkPosition.value === TaskQMarkPosition.qMarkPosition_left.value) {
+          userInputValueIndex = 0;
+        }
+        let task = new Task(this.taskConfig.guid, UUID.UUID(), numbers, false, userInputValueIndex);
+        let valid =  this.validateTaskSet(task, tasks)
+        if (!valid) {
+          continue;
+        }
+        tasks.push(task);
       }
     }
-    return numbers;
+
   }
+
+  private validateTaskSet(newTask: Task, tasks: Task[]) {
+    let valid = true;
+    for (let task of tasks) {
+      let currentNumbers = task.getNumbers();
+      let newNumbers = newTask.getNumbers();
+
+      if (newNumbers !== null && newNumbers !== undefined && currentNumbers  !== null && currentNumbers !== undefined) {
+        let validNumbers = this.compareMaps(currentNumbers, newNumbers)
+        if (!validNumbers) {
+          valid = false;
+        }
+      }
+    }
+    return valid;
+  }
+
+  private compareMaps(map1: Map<any, any>, map2: Map<any, any>) {
+    let testVal;
+    if (map1.size !== map2.size) {
+      console.log('validFalse');
+      return false;
+    }
+    for (var [key, val] of map1) {
+      testVal  = map2.get(key);
+      if (testVal !== val || (testVal === undefined && !map2.has(key))) {
+        console.log('validTrue');
+        return true;
+      }
+    }
+    console.log('validFalse');
+    return false;
+  }
+
 
   private validateTask(numbers: number[], mathOperator: TaskMathOperator) {
-    let result = false;
-    if (mathOperator.value === TaskMathOperator.mathOperator_add.value) {
 
-    }
-    if (mathOperator.value === TaskMathOperator.mathOperator_subtract.value) {
+  }
 
-    }
-    if (mathOperator === TaskMathOperator.mathOperator_divide) {
-
-    }
-    if (mathOperator === TaskMathOperator.mathOperator_multiply) {
-
+  generateNumber() {
+    let r = Math.floor(Math.random() * this.taskConfig.range.value) + 1;
+    if (r <= this.taskConfig.range.value) {
+      return r;
+    } else {
+      return null;
     }
   }
+
 
 }

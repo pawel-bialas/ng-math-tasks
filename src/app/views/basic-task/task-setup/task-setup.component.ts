@@ -22,7 +22,7 @@ export class TaskSetupComponent implements OnInit, OnDestroy, AfterViewInit {
   rowHeight = '300px';
 
   //Object properties
-  taskConfig: TaskConfig = new TaskConfig(TaskQuantity.quantity_4, TaskRange.range_10, TaskQMarkPosition.qMarkPosition_right, TaskMathOperator.mathOperator_add, false);
+  taskConfig: TaskConfig = new TaskConfig(TaskQuantity.quantity_4, TaskRange.range_10, TaskQMarkPosition.qMarkPosition_right, TaskMathOperator.mathOperator_add, false, 'bafb8e8f-d66f-4dbe-b8c5-c4db13c9a46f');
   qMarkPosition = TaskQMarkPosition;
   mathOperator = TaskMathOperator;
   taskQuantity = TaskQuantity;
