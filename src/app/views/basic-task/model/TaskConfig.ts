@@ -6,49 +6,73 @@ import {UUID} from 'angular2-uuid';
 
 export class TaskConfig {
 
-  public quantity: TaskQuantity ;
-  public range: TaskRange;
-  public qMarkPosition: TaskQMarkPosition;
-  public mathOperator: TaskMathOperator;
-  public guid: UUID;
-  public isReady: boolean;
+  private _quantity: TaskQuantity ;
+  private _range: TaskRange;
+  private _qMarkPosition: TaskQMarkPosition;
+  private _mathOperator: TaskMathOperator;
+  private _guid: string | UUID;
+  private _isReady: boolean;
 
-  public constructor(quantity: TaskQuantity, range: TaskRange, qMarkPosition: TaskQMarkPosition, mathOperator: TaskMathOperator, isReady: boolean, guid: UUID) {
-   this.quantity = quantity;
-   this.range = range;
-   this.qMarkPosition = qMarkPosition;
-   this.mathOperator = mathOperator;
-   this.isReady = isReady;
-   this.guid = guid;
+  public constructor(quantity: TaskQuantity, range: TaskRange, qMarkPosition: TaskQMarkPosition, mathOperator: TaskMathOperator, isReady: boolean, guid: string) {
+   this._quantity = quantity;
+   this._range = range;
+   this._qMarkPosition = qMarkPosition;
+   this._mathOperator = mathOperator;
+   this._isReady = isReady;
+   this._guid = guid;
   }
 
   getListProperties(){
     return ['quantity', 'range','qMarkPosition', 'mathOperator'];
   }
 
-  public getQuantity() {
-    return this.quantity;
+
+  get quantity(): TaskQuantity {
+    return this._quantity;
   }
 
-  public getRange() {
-    return this.range;
+  set quantity(value: TaskQuantity) {
+    this._quantity = value;
   }
 
-  public getqMarkPosition() {
-    return this.qMarkPosition;
+  get range(): TaskRange {
+    return this._range;
   }
 
-  public getMathOperator() {
-    return this.mathOperator;
+  set range(value: TaskRange) {
+    this._range = value;
   }
 
-  public getIsReady() {
-    return this.isReady;
+  get qMarkPosition(): TaskQMarkPosition {
+    return this._qMarkPosition;
   }
 
-  public getGuid(){
-    return this.guid;
+  set qMarkPosition(value: TaskQMarkPosition) {
+    this._qMarkPosition = value;
   }
 
+  get mathOperator(): TaskMathOperator {
+    return this._mathOperator;
+  }
+
+  set mathOperator(value: TaskMathOperator) {
+    this._mathOperator = value;
+  }
+
+  get guid(): string | UUID {
+    return this._guid;
+  }
+
+  set guid(value: string | UUID) {
+    this._guid = value;
+  }
+
+  get isReady(): boolean {
+    return this._isReady;
+  }
+
+  set isReady(value: boolean) {
+    this._isReady = value;
+  }
 }
 

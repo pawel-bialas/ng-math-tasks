@@ -7,7 +7,8 @@ import {TaskQuantity} from "../params/TaskQuantity";
 import {TaskRange} from "../params/TaskRange";
 import {TaskQMarkPosition} from "../params/TaskQMarkPosition";
 import {UUID} from "angular2-uuid";
-import {Task} from "../model/Task";
+import {BasicTask} from "../model/BasicTask";
+import {GUID} from "../../../common/RandomGuid";
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ import {Task} from "../model/Task";
 export class TaskCreateService implements OnInit, OnDestroy {
 
   //Object & properties
-  taskConfig: TaskConfig = new TaskConfig(TaskQuantity.quantity_4, TaskRange.range_10, TaskQMarkPosition.qMarkPosition_right, TaskMathOperator.mathOperator_add, false, UUID.UUID())
+  taskConfig: TaskConfig = new TaskConfig(TaskQuantity.quantity_4, TaskRange.range_10, TaskQMarkPosition.qMarkPosition_right, TaskMathOperator.mathOperator_add, false, GUID)
 
   //Subscriptions
   taskConfigSub: Subscription = new Subscription();
@@ -39,6 +40,8 @@ export class TaskCreateService implements OnInit, OnDestroy {
       this.taskConfig = value;
     });
 
+    let acv = UUID.UUID().toString()
+
     console.log(this.taskConfig);
 
     if (this.taskConfig.mathOperator.value === TaskMathOperator.mathOperator_add.value) {
@@ -58,17 +61,17 @@ export class TaskCreateService implements OnInit, OnDestroy {
   }
 
   private provideAddTaskSet(mathOperator: TaskMathOperator, quantity: TaskQuantity, range: TaskRange, qMarkPosition: TaskQMarkPosition) {
-    let tasks: Task[] = [];
+    let tasks: BasicTask[] = [];
     if (mathOperator === TaskMathOperator.mathOperator_add) {
       let userInputValueIndex: number = 3;
 
       while (tasks.length < quantity.value) {
 
 
-        let numbers = new Map();
-        numbers.set('number1', this.generateNumber());
-        numbers.set('number2', this.generateNumber());
-        numbers.set('result', (numbers.get('number1') + (numbers.get('number2'))));
+        let values = new Map();
+        values.set('number1', this.generateNumber());
+        values.set('number2', this.generateNumber());
+        values.set('result', (values.get('number1') + (values.get('number2'))));
 
         if (qMarkPosition.value === TaskQMarkPosition.qMarkPosition_right.value) {
           userInputValueIndex = 2;
@@ -79,22 +82,23 @@ export class TaskCreateService implements OnInit, OnDestroy {
         if (qMarkPosition.value === TaskQMarkPosition.qMarkPosition_left.value) {
           userInputValueIndex = 0;
         }
-        let task = new Task(this.taskConfig.guid, UUID.UUID(), numbers, false, userInputValueIndex);
+        let task = new BasicTask(GUID, GUID, values, false, userInputValueIndex);
         let valid =  this.validateTaskSet(task, tasks)
         if (!valid) {
           continue;
         }
         tasks.push(task);
       }
+      console.log(tasks);
     }
 
   }
 
-  private validateTaskSet(newTask: Task, tasks: Task[]) {
+  private validateTaskSet(newTask: BasicTask, tasks: BasicTask[]) {
     let valid = true;
     for (let task of tasks) {
-      let currentNumbers = task.getNumbers();
-      let newNumbers = newTask.getNumbers();
+      let currentNumbers = task.values;
+      let newNumbers = newTask.values;
 
       if (newNumbers !== null && newNumbers !== undefined && currentNumbers  !== null && currentNumbers !== undefined) {
         let validNumbers = this.compareMaps(currentNumbers, newNumbers)
@@ -115,7 +119,6 @@ export class TaskCreateService implements OnInit, OnDestroy {
     for (var [key, val] of map1) {
       testVal  = map2.get(key);
       if (testVal !== val || (testVal === undefined && !map2.has(key))) {
-        console.log('validTrue');
         return true;
       }
     }

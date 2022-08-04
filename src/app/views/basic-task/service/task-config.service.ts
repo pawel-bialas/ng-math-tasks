@@ -6,13 +6,14 @@ import {TaskMathOperator} from '../params/TaskMathOperator';
 import {TaskRange} from "../params/TaskRange";
 import {TaskQuantity} from "../params/TaskQuantity";
 import {UUID} from "angular2-uuid";
+import {GUID} from "../../../common/RandomGuid";
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskConfigService {
 
-  private taskOptions = new BehaviorSubject(new TaskConfig(TaskQuantity.quantity_4, TaskRange.range_10, TaskQMarkPosition.qMarkPosition_right, TaskMathOperator.mathOperator_add, false, UUID.UUID()));
+  private taskOptions = new BehaviorSubject(new TaskConfig(TaskQuantity.quantity_4, TaskRange.range_10, TaskQMarkPosition.qMarkPosition_right, TaskMathOperator.mathOperator_add, false, GUID));
   data$: Observable<TaskConfig> = this.taskOptions.asObservable();
 
   constructor() { }
@@ -23,7 +24,7 @@ export class TaskConfigService {
   }
 
   resetSetup(): void {
-    let taskOptions = new TaskConfig(TaskQuantity.quantity_4, TaskRange.range_10, TaskQMarkPosition.qMarkPosition_right, TaskMathOperator.mathOperator_add, false,UUID.UUID());
+    let taskOptions = new TaskConfig(TaskQuantity.quantity_4, TaskRange.range_10, TaskQMarkPosition.qMarkPosition_right, TaskMathOperator.mathOperator_add, false,GUID);
     this.taskOptions.next(taskOptions)  }
 
 
