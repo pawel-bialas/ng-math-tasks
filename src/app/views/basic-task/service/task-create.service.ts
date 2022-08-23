@@ -6,7 +6,6 @@ import {TaskConfigService} from "./task-config.service";
 import {TaskQuantity} from "../params/TaskQuantity";
 import {TaskRange} from "../params/TaskRange";
 import {TaskQMarkPosition} from "../params/TaskQMarkPosition";
-import {UUID} from "angular2-uuid";
 import {BasicTask} from "../model/BasicTask";
 import {GUID} from "../../../common/RandomGuid";
 
@@ -17,7 +16,8 @@ export class TaskCreateService implements OnInit, OnDestroy {
 
   //Object & properties
   taskConfig: TaskConfig = new TaskConfig(TaskQuantity.quantity_4, TaskRange.range_10, TaskQMarkPosition.qMarkPosition_right, TaskMathOperator.mathOperator_add, false, GUID)
-
+  multiplyValuesSet: any[] = [];
+  divideValuesSet: any[] = [];
   //Subscriptions
   taskConfigSub: Subscription = new Subscription();
 
@@ -39,58 +39,32 @@ export class TaskCreateService implements OnInit, OnDestroy {
     this.taskConfigSub = this.taskConfigService.data$.subscribe(value => {
       this.taskConfig = value;
     });
-
-    let acv = UUID.UUID().toString()
-
-    console.log(this.taskConfig);
-
-    if (this.taskConfig.mathOperator.value === TaskMathOperator.mathOperator_add.value) {
-      this.provideAddTaskSet(this.taskConfig.mathOperator, this.taskConfig.quantity, this.taskConfig.range, this.taskConfig.qMarkPosition);
-    }
-    if (this.taskConfig.mathOperator.value === TaskMathOperator.mathOperator_subtract.value) {
-
-    }
-    if (this.taskConfig.mathOperator.value === TaskMathOperator.mathOperator_divide.value) {
-
-    }
-    if (this.taskConfig.mathOperator.value === TaskMathOperator.mathOperator_multiply.value) {
-
-    }
+    return this.provideTaskSet(this.taskConfig.mathOperator, this.taskConfig.quantity, this.taskConfig.range, this.taskConfig.qMarkPosition);
 
 
   }
 
-  private provideAddTaskSet(mathOperator: TaskMathOperator, quantity: TaskQuantity, range: TaskRange, qMarkPosition: TaskQMarkPosition) {
+  private provideTaskSet(mathOperator: TaskMathOperator, quantity: TaskQuantity, range: TaskRange, qMarkPosition: TaskQMarkPosition): BasicTask[] {
     let tasks: BasicTask[] = [];
-    if (mathOperator === TaskMathOperator.mathOperator_add) {
-      let userInputValueIndex: number = 3;
+    let userInputValueIndex = 3;
 
-      while (tasks.length < quantity.value) {
+    while (tasks.length < quantity.value) {
 
-
-        let values = new Map();
-        values.set('number1', this.generateNumber());
-        values.set('number2', this.generateNumber());
-        values.set('result', (values.get('number1') + (values.get('number2'))));
-
-        if (qMarkPosition.value === TaskQMarkPosition.qMarkPosition_right.value) {
-          userInputValueIndex = 2;
-        }
-        if (qMarkPosition.value === TaskQMarkPosition.qMarkPosition_center.value) {
-          userInputValueIndex = 1;
-        }
-        if (qMarkPosition.value === TaskQMarkPosition.qMarkPosition_left.value) {
-          userInputValueIndex = 0;
-        }
-        let task = new BasicTask(GUID, GUID, values, false, userInputValueIndex);
-        let valid =  this.validateTaskSet(task, tasks)
-        if (!valid) {
-          continue;
-        }
-        tasks.push(task);
+      userInputValueIndex = this.setUserInputIndex(qMarkPosition)
+      let values = this.createValues(mathOperator, range);
+      let validTask = this.validateTask(mathOperator, range, values);
+      if (!validTask) {
+        continue;
       }
-      console.log(tasks);
+      let task = new BasicTask(GUID, GUID, values, false, userInputValueIndex);
+      let validTaskSet = this.validateTaskSet(task, tasks)
+      if (!validTaskSet) {
+        continue;
+      }
+      tasks.push(task);
     }
+    console.log(tasks);
+    return tasks;
 
   }
 
@@ -100,7 +74,7 @@ export class TaskCreateService implements OnInit, OnDestroy {
       let currentNumbers = task.values;
       let newNumbers = newTask.values;
 
-      if (newNumbers !== null && newNumbers !== undefined && currentNumbers  !== null && currentNumbers !== undefined) {
+      if (newNumbers !== null && newNumbers !== undefined && currentNumbers !== null && currentNumbers !== undefined) {
         let validNumbers = this.compareMaps(currentNumbers, newNumbers)
         if (!validNumbers) {
           valid = false;
@@ -117,7 +91,7 @@ export class TaskCreateService implements OnInit, OnDestroy {
       return false;
     }
     for (var [key, val] of map1) {
-      testVal  = map2.get(key);
+      testVal = map2.get(key);
       if (testVal !== val || (testVal === undefined && !map2.has(key))) {
         return true;
       }
@@ -127,18 +101,173 @@ export class TaskCreateService implements OnInit, OnDestroy {
   }
 
 
-  private validateTask(numbers: number[], mathOperator: TaskMathOperator) {
+  private validateTask(mathOperator: TaskMathOperator, taskRange: TaskRange, values: Map<any, any>) {
+    let validate = true;
 
-  }
-
-  generateNumber() {
-    let r = Math.floor(Math.random() * this.taskConfig.range.value) + 1;
-    if (r <= this.taskConfig.range.value) {
-      return r;
-    } else {
-      return null;
+    if (mathOperator.value === TaskMathOperator.mathOperator_add.value) {
+      if (!((values.get('number1') + values.get('number2')) === values.get('result'))) {
+        validate = false;
+      }
     }
+    if (mathOperator.value === TaskMathOperator.mathOperator_subtract.value) {
+      if (!((values.get('number1') - values.get('number2')) === values.get('result'))) {
+        validate = false;
+      }
+    }
+    if (mathOperator.value === TaskMathOperator.mathOperator_multiply.value) {
+      if (!((values.get('number1') * values.get('number2')) === values.get('result'))) {
+        validate = false;
+      }
+      if (values.get('number1') === 1) {
+        validate = false;
+      }
+      if (values.get('number2') === 1) {
+        validate = false;
+      }
+    }
+    if (mathOperator.value === TaskMathOperator.mathOperator_divide.value) {
+      if (!((values.get('number1') / values.get('number2')) === values.get('result'))) {
+        validate = false;
+      }
+      if (values.get('number1') === 1) {
+        validate = false;
+      }
+      if (values.get('number2') === 1) {
+        validate = false;
+      }
+    }
+
+    if (validate) {
+      if (values.get('result') <= 0) {
+        validate = false;
+      }
+    }
+    if (validate) {
+      if (!(Number.isInteger(values.get('result')))) {
+        validate = false;
+      }
+    }
+    if (validate) {
+      if ((values.get('result') < (taskRange.value / 2))) {
+        validate = false;
+      }
+    }
+    if (validate) {
+      if ((values.get('result') > (taskRange.value * 2))) {
+        validate = false;
+      }
+    }
+    return validate;
+  }
+
+  generateRandomNumber(taskRange: TaskRange) {
+    let r = Math.floor(Math.random() * taskRange.value) + 1;
+    while (r > taskRange.value) {
+      r = Math.floor(Math.random() * taskRange.value) + 1;
+    }
+    return r;
+  }
+
+  generateRandomIndex(arraLength: number) {
+    return Math.floor(Math.random() * arraLength) + 1;
   }
 
 
+  private createValues(mathOperator: TaskMathOperator, taskRange: TaskRange) {
+    let values = new Map();
+    let number1: number;
+    let number2: number;
+    let index = -1;
+
+    number1 = this.generateRandomNumber(taskRange);
+    number2 = this.generateRandomNumber(taskRange);
+
+    values.set('number1', number1);
+    values.set('number2', number2);
+    values.set('result', this.setResult(mathOperator, values.get('number1'), values.get('number2')));
+
+
+    if (mathOperator.value === TaskMathOperator.mathOperator_multiply.value || mathOperator.value === TaskMathOperator.mathOperator_divide.value) {
+      for (let i = 1; i <= taskRange.value; i++) {
+        values = new Map();
+        values.set('number1', i);
+        values.set('number2', i);
+        values.set('result', this.setResult(mathOperator, values.get('number1'), values.get('number2')));
+        let valid = this.validateTask(mathOperator, taskRange, values);
+        if (valid) {
+
+          if (mathOperator.value === TaskMathOperator.mathOperator_divide.value) {
+            this.divideValuesSet.push(values);
+          }
+          if (mathOperator.value === TaskMathOperator.mathOperator_multiply.value) {
+            this.multiplyValuesSet.push(values);
+          }
+        }
+      }
+      if (mathOperator.value === TaskMathOperator.mathOperator_divide.value) {
+        if (this.divideValuesSet.length > 0) {
+          index = this.generateRandomIndex(this.divideValuesSet.length)
+        }
+      }
+      if (mathOperator.value === TaskMathOperator.mathOperator_multiply.value) {
+        if (this.multiplyValuesSet.length > 0) {
+          index = this.generateRandomIndex(this.multiplyValuesSet.length)
+        }
+      }
+    }
+
+    if (index !== -1) {
+      if (mathOperator.value === TaskMathOperator.mathOperator_multiply.value) {
+        values = this.multiplyValuesSet[index];
+      }
+      if (mathOperator.value === TaskMathOperator.mathOperator_divide.value) {
+        values = this.divideValuesSet[index];
+      }
+
+    }
+
+    return values;
+  }
+
+  private setResult(mathOperator: TaskMathOperator, number1: number, number2: number) {
+
+    let result: number;
+
+    switch (mathOperator.value) {
+      case '+':
+        result = number1 + number2;
+        break;
+      case '-':
+        result = number1 - number2;
+
+        break;
+      case '*':
+        result = number1 * number2;
+
+        break;
+      case '/':
+        result = number1 / number2;
+        break;
+
+      default:
+        result = 0;
+    }
+
+    return result;
+
+  }
+
+  private setUserInputIndex(qMarkPosition: TaskQMarkPosition) {
+    let result = 3;
+    if (qMarkPosition.value === TaskQMarkPosition.qMarkPosition_right.value) {
+      result = 2;
+    }
+    if (qMarkPosition.value === TaskQMarkPosition.qMarkPosition_center.value) {
+      result = 1;
+    }
+    if (qMarkPosition.value === TaskQMarkPosition.qMarkPosition_left.value) {
+      result = 0;
+    }
+    return result;
+  }
 }
