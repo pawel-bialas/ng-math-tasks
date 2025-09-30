@@ -1,31 +1,75 @@
-mat-card-content > h2 {
+.taskSetup {
+  display: flex;
+  flex-direction: column;
+
+}
+.taskSetup .task-action {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.taskSetup mat-card {
+  width: calc(100% - 70px);
+  height: calc(100% - 70px);
+}
+.taskSetup .configList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.taskSetup .optionList {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.taskSetup mat-card-content > h2 {
   text-align: center;
 }
 
 
-.option-card{
+.taskSetup .option-card{
   width: 32vw;
 }
 
-.options-area {
+.taskSetup .options-area {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 3vh;
 }
 
-.setup-option {
+.taskSetup .setup-option {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.title_center {
+.taskSetup .title_center {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.task-config {
+.taskSetup .task-config {
   display: flex;
   flex-direction: column;
 }
+
+.taskSetup .actionButtons {
+  display: flex;
+  justify-content: space-between;
+  vertical-align: center;
+}
+
+.taskSetup .buttonContainer {
+  display: flex;
+  justify-content: center;
+
+}
+
+.taskSetup .selectedButton {
+  background: #00EEEE;
+  color: #FFF;
+  transition: background-color 0.8s;
+
+}
+
+

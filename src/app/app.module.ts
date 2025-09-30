@@ -22,14 +22,7 @@ import { TaskSetupComponent } from './views/basic-task/task-setup/task-setup.com
 
 @NgModule({
   declarations: [
-    AppComponent,
-    HomeComponent,
-    LoginComponent,
-    AboutComponent,
-    RegisterComponent,
-    BasicTaskComponent,
-    TaskWindowComponent,
-    TaskSetupComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +32,14 @@ import { TaskSetupComponent } from './views/basic-task/task-setup/task-setup.com
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
+    HomeComponent,
+    LoginComponent,
+    AboutComponent,
+    RegisterComponent,
+    BasicTaskComponent,
+    TaskWindowComponent,
+    TaskSetupComponent
   ],
   exports: [
     MaterialModule
