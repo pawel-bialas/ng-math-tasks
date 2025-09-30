@@ -8,10 +8,10 @@
             <mat-card-content>
               <h2>Set up</h2>
               <div class="task-config">
-                <span>Operator: {{taskConfig.mathOperator.value.toString()}}</span>
-                <span>Quantity: {{taskConfig.quantity.value}}</span>
-                <span>Range: {{taskConfig.range.value}}</span>
-                <span>Variant: {{taskConfig.qMarkPosition.value.toString()}}</span>
+                <span>Operator: {{taskConfig.mathOperator.toString()}}</span>
+                <span>Quantity: {{taskConfig.quantity}}</span>
+                <span>Range: {{taskConfig.range}}</span>
+                <span>Variant: {{taskConfig.qMarkPosition.toString()}}</span>
               </div>
             </mat-card-content>
             <mat-card-actions>
@@ -51,22 +51,22 @@
               <div class="options-area" id="mathOperator" #_mathOperator>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateOperator(mathOperator.mathOperator_add)">
-                    {{mathOperator.mathOperator_add.value}}
+                    {{mathOperator.mathOperator_add}}
                   </button>
                 </div>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateOperator(mathOperator.mathOperator_subtract)">
-                    {{mathOperator.mathOperator_subtract.value}}
+                    {{mathOperator.mathOperator_subtract}}
                   </button>
                 </div>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateOperator(mathOperator.mathOperator_multiply)">
-                    {{mathOperator.mathOperator_multiply.value}}
+                    {{mathOperator.mathOperator_multiply}}
                   </button>
                 </div>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateOperator(mathOperator.mathOperator_divide)">
-                    {{mathOperator.mathOperator_divide.value}}
+                    {{mathOperator.mathOperator_divide}}
                   </button>
                 </div>
               </div>
@@ -80,22 +80,22 @@
               <div class="options-area" id="quantity" #_quantity>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateQuantity(taskQuantity.quantity_4)">
-                    {{taskQuantity.quantity_4.value}}
+                    {{taskQuantity.quantity_4}}
                   </button>
                 </div>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateQuantity(taskQuantity.quantity_10)">
-                    {{taskQuantity.quantity_10.value}}
+                    {{taskQuantity.quantity_10}}
                   </button>
                 </div>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateQuantity(taskQuantity.quantity_20)">
-                    {{taskQuantity.quantity_20.value}}
+                    {{taskQuantity.quantity_20}}
                   </button>
                 </div>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateQuantity(taskQuantity.quantity_40)">
-                    {{taskQuantity.quantity_40.value}}
+                    {{taskQuantity.quantity_40}}
                   </button>
                 </div>
 
@@ -113,22 +113,22 @@
 
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateRange(taskRange.range_10)">
-                    {{taskRange.range_10.value}}
+                    {{taskRange.range_10}}
                   </button>
                 </div>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateRange(taskRange.range_20)">
-                    {{taskRange.range_20.value}}
+                    {{taskRange.range_20}}
                   </button>
                 </div>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateRange(taskRange.range_50)">
-                    {{taskRange.range_50.value}}
+                    {{taskRange.range_50}}
                   </button>
                 </div>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateRange(taskRange.range_100)">
-                    {{taskRange.range_100.value}}
+                    {{taskRange.range_100}}
                   </button>
                 </div>
               </div>
@@ -144,17 +144,17 @@
               <div class="options-area" id="qMarkPosition" #_qMarkPosition>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateVariant(qMarkPosition.qMarkPosition_left)">
-                    {{qMarkPosition.qMarkPosition_left.value}}
+                    {{qMarkPosition.qMarkPosition_left}}
                   </button>
                 </div>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateVariant(qMarkPosition.qMarkPosition_center)">
-                    {{qMarkPosition.qMarkPosition_center.value}}
+                    {{qMarkPosition.qMarkPosition_center}}
                   </button>
                 </div>
                 <div class="setup-option">
                   <button mat-mini-fab color="primary" (click)="updateVariant(qMarkPosition.qMarkPosition_right)">
-                    {{qMarkPosition.qMarkPosition_right.value}}
+                    {{qMarkPosition.qMarkPosition_right}}
                   </button>
                 </div>
               </div>
