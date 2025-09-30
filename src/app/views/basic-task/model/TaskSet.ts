@@ -1,4 +1,4 @@
-import {UUID} from "angular2-uuid";
+import { v4 as uuidv4 } from 'uuid';
 import {TaskConfig} from "./TaskConfig";
 import {BasicTask} from "./BasicTask";
 

@@ -12,7 +12,6 @@ import {TaskConfigStarted} from "../model/TaskConfigStarted";
 import {BasicTaskStarted} from "../model/BasicTaskStarted";
 import {TaskSolutionService} from "./task-solution.service";
 import {Router} from "@angular/router";
-import {UUID} from "angular2-uuid";
 
 @Injectable({
   providedIn: 'root'
@@ -63,7 +62,7 @@ export class TaskStartService implements OnInit, OnDestroy {
 
 
 
-  private provideTasks(tasks: BasicTask[], configGuid: String | UUID): BasicTaskStarted[]{
+  private provideTasks(tasks: BasicTask[], configGuid: string): BasicTaskStarted[]{
     let res: BasicTaskStarted[] = [];
     for (let t of tasks) {
       res.push(new BasicTaskStarted(t,configGuid));

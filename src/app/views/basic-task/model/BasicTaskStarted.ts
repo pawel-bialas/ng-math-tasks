@@ -1,31 +1,31 @@
-import {UUID} from "angular2-uuid";
+import { v4 as uuidv4 } from 'uuid';
 import {BasicTask} from "./BasicTask";
 
 export class BasicTaskStarted extends BasicTask {
 
 
-  private readonly _taskGuid: string | UUID;
-  private readonly _configGuid: string |  UUID;
+  private readonly _taskGuid: string;
+  private readonly _configGuid: string;
   private readonly _dateCreated: Date;
   private _userInputValue: number | null | undefined;
   private _dateModified: Date | null | undefined;
 
   constructor(
     task: BasicTask,
-    configGuid: string | UUID) {
+    configGuid: string) {
     super(task.values, task.isCorrect, task.userInputValueIndex);
-    this._taskGuid = UUID.UUID();
+    this._taskGuid = uuidv4();
     this._configGuid = configGuid;
     this._dateCreated = new Date();
     this._userInputValue = null;
     this._dateModified = null;
   }
 
-  get taskGuid(): string | UUID {
+  get taskGuid(): string {
     return this._taskGuid;
   }
 
-  get configGuid(): string | UUID {
+  get configGuid(): string {
     return this._configGuid;
   }
 

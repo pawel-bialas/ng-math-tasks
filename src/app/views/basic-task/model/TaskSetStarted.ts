@@ -1,4 +1,4 @@
-import {UUID} from "angular2-uuid";
+import { v4 as uuidv4 } from 'uuid';
 import {TaskSet} from "./TaskSet";
 
 export class TaskSetStarted extends TaskSet{
@@ -6,14 +6,14 @@ export class TaskSetStarted extends TaskSet{
 
   private _dateModified: Date | undefined | null;
   private _dateStarted: Date | undefined | null;
-  private _taskSetGuid: string |  UUID;
+  private _taskSetGuid: string;
 
 
   constructor(
     taskSet: TaskSet,
   ) {
     super(taskSet.taskConfig, taskSet.tasks);
-    this._taskSetGuid = UUID.UUID();
+    this._taskSetGuid = uuidv4();
     this._dateModified = null;
     this._dateStarted = null;
   }

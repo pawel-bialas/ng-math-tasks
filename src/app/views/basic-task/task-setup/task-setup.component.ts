@@ -1,5 +1,10 @@
 import {AfterViewInit, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import { CommonModule } from '@angular/common';
 import {BreakpointObserver, Breakpoints} from "@angular/cdk/layout";
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
 import {TaskConfig} from "../model/TaskConfig";
 import {TaskQMarkPosition} from "../params/TaskQMarkPosition";
 import {TaskMathOperator} from "../params/TaskMathOperator";
@@ -11,6 +16,8 @@ import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-task-setup',
+  standalone: true,
+  imports: [CommonModule, MatGridListModule, MatCardModule, MatButtonModule, MatIconModule],
   templateUrl: './task-setup.component.html',
   styleUrls: ['./task-setup.component.scss']
 })
